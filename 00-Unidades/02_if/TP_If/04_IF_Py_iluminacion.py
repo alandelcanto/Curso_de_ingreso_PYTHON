@@ -5,8 +5,8 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-nombre:
-apellido:
+nombre: Alan
+apellido: del Canto
 ---
 TP: IF_Iluminacion
 ---
@@ -43,7 +43,46 @@ class App(customtkinter.CTk):
 
 
     def btn_calcular_on_click(self):
-        pass
+        unitPrice = 800
+        discount = 0
+
+        quantity = self.combobox_cantidad.get()
+        quantity = int(quantity)
+
+        brand = self.combobox_marca.get()
+
+        if quantity >= 6:
+            discount += 50
+        elif quantity == 5:
+            if brand == "ArgentinaLuz":
+                discount += 40
+            else:
+                discount += 30
+        elif quantity == 4:
+            if brand == "ArgentinaLuz" or brand == "FelipeLamparas":
+                discount += 25
+            else:
+                discount += 20
+        elif quantity == 3:
+            if brand == "ArgentinaLuz":
+                discount += 15
+            elif brand == "FelipeLamparas":
+                discount += 10
+            else:
+                discount += 5
+
+        subTotal = quantity * unitPrice
+        total = subTotal * (1 - discount / 100)
+
+        if total > 4000:
+            discount += 5
+            total = subTotal * (1 - discount / 100)
+
+        total = round(total)
+
+
+        message = f"El importe total de su compra de {quantity} lámparas de bajo consumo de marca {brand} es de ${total}, considerando un descuento del {discount}% de un total sin descontar de ${subTotal}, calculado según sus opciones de compra."
+        alert("Informe de Compra", message)
         
     
 if __name__ == "__main__":

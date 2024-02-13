@@ -27,7 +27,10 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_on_click(self):
-        pass
+        randomValue = random.randint(1, 10)
+
+        message = f"El número es {randomValue}"
+        alert("Número aleatorio", message)
         
 
 if __name__ == "__main__":
