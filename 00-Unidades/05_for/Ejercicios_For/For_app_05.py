@@ -5,8 +5,8 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-nombre:
-apellido:
+nombre: Alan
+apellido: del Canto
 ---
 Ejercicio: for_05
 ---
@@ -27,7 +27,18 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_on_click(self):
-        pass
+        endValue = prompt("Número", "Ingrese un número")
+        endValue = int(endValue)
+
+        counter = 0
+
+        for i in range(1, endValue):
+            if i % 2 == 0:
+                print(i)
+                counter += 1
+
+        alert("Cantidad de pares", f"Se encontraron {counter} números pares")
+
             
         
     

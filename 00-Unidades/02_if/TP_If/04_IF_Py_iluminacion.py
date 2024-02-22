@@ -52,24 +52,24 @@ class App(customtkinter.CTk):
         brand = self.combobox_marca.get()
 
         if quantity >= 6:
-            discount += 50
+            discount = 50
         elif quantity == 5:
             if brand == "ArgentinaLuz":
-                discount += 40
+                discount = 40
             else:
-                discount += 30
+                discount = 30
         elif quantity == 4:
             if brand == "ArgentinaLuz" or brand == "FelipeLamparas":
-                discount += 25
+                discount = 25
             else:
-                discount += 20
+                discount = 20
         elif quantity == 3:
             if brand == "ArgentinaLuz":
-                discount += 15
+                discount = 15
             elif brand == "FelipeLamparas":
-                discount += 10
+                discount = 10
             else:
-                discount += 5
+                discount = 5
 
         subTotal = quantity * unitPrice
         total = subTotal * (1 - discount / 100)

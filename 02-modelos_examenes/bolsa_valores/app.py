@@ -95,8 +95,196 @@ class App(customtkinter.CTk):
         self.lista_cantidad_instrumento = [20, 35, 199, 100, 80]
     
     def btn_cargar_datos_on_click(self):
-        pass
+        operationCEDEARCounter = 0
+        operationBONOSCounter = 0
+        operationMEPCounter = 0
+        
+        zeroDataRegisterType = ""
 
+        firstDataRegisterType = ""
+
+        secondDataRegisterAmount = 0
+
+        thirdDataRegisterAmount = 0
+
+        fourthDataRegisterName = ""
+        fourthDataRegisterCost = 0
+        fourthDataRegisterFlag = False
+
+        fifthDataRegisterName = ""
+        fifthDataRegisterAmount = 0
+        fifthDataRegisterIndex = 0
+
+        sixthDataRegisterName = ""
+        sixthDataRegisterCost = 0
+        sixthDataRegisterIndex = 0
+        sixthDataRegisterFlag = False
+
+        seventhDataRegisterName = ""
+        seventhDataRegisterAmount = 0
+        seventhDataRegisterIndex = 0
+
+        eighthDataRegisterSum = 0
+        eighthDataRegisterAverage = 0
+
+        ninthDataRegisterSum = 0
+        ninthDataRegisterAverage = 0
+
+        for i in range(10):
+            name = prompt("Ingrese datos", "Ingrese el nombre del usuario") #Input de nombre
+            if name == None:
+                break
+
+            operationCost = prompt("Ingrese datos", "Ingrese el monto de la operación") #Input de costo de operación
+            if operationCost != None:
+                operationCost = int(operationCost)
+            else:
+                break
+            while operationCost < 10000: #Verificación
+                operationCost = prompt("Reingrese datos", "Reingrese un monto mayor a $10000")
+                if operationCost != None:
+                    operationCost = int(operationCost)
+                else:
+                    break
+
+            operationType = prompt("Ingrese datos", "Ingrese si es una operación de CEDEAR, BONOS, o MEP") #Input de tipo de operación
+            if operationType == None:
+                break
+            while operationType != "CEDEAR" and operationType != "BONOS" and operationType != "MEP": #Verificación
+                operationType = prompt("Reingrese datos", "Reingrese si es una operación de CEDEAR, BONOS, o MEP")
+                if operationType == None:
+                    break
+
+
+            operationCount = prompt("Ingrese datos", "Ingrese el número de elementos comprados") #Input de tipo de operación
+            if operationCount != None:
+                operationCount = int(operationCount)
+            else:
+                break
+            while operationCount < 0: #Verificación
+                operationCount = prompt("Ingrese datos", "Ingrese el número de elementos comprados")
+                if operationCount != None:
+                    operationCount = int(operationCount)
+                else:
+                    break
+
+
+            #0 | 1
+            match operationType:
+                case "CEDEAR":
+                    operationCEDEARCounter += 1
+                case "BONOS":
+                    operationBONOSCounter += 1
+                case _:
+                    operationMEPCounter += 1
+
+            #2
+            if operationType == "MEP" and 50 <= operationCount <= 200:
+                secondDataRegisterAmount += 1
+
+            #3
+            if operationType != "CEDEAR":
+                thirdDataRegisterAmount += 1
+
+            #4
+            if fourthDataRegisterFlag == False and operationType != "MEP":
+                fourthDataRegisterName = name
+                fourthDataRegisterCost = operationCost
+                fourthDataRegisterFlag = True
+
+            #5
+            if operationCount < fifthDataRegisterAmount and operationType == "BONOS":
+                fifthDataRegisterAmount = operationCount
+                fifthDataRegisterName = name
+                fifthDataRegisterIndex = i + 1
+
+            #6
+            if sixthDataRegisterFlag == False:
+                sixthDataRegisterCost = operationCost
+                sixthDataRegisterName = name
+                sixthDataRegisterIndex = i + 1
+
+            if operationCost < sixthDataRegisterCost:
+                sixthDataRegisterCost = operationCost
+                sixthDataRegisterName = name
+                sixthDataRegisterIndex = i + 1
+                sixthDataRegisterFlag == True
+
+            #7
+            if operationCount > seventhDataRegisterAmount:
+                seventhDataRegisterAmount = operationCount
+                seventhDataRegisterName = name
+                seventhDataRegisterIndex = i + 1
+
+            #8
+            if operationType == "CEDEAR":
+                eighthDataRegisterSum += operationCost
+
+            #9
+            if operationType == "MEP":
+                ninthDataRegisterSum += operationCount
+
+            print(f"El comprador N° {i + 1}")
+            print(f"Su nombre es {name}")
+            print(f"Compró {operationCount} de unidades de {operationType} por un total de ${operationCost}")
+            print()
+
+            message = f'''
+            Es el comprador N° {i + 1}
+            Su nombre es {name}
+            "Compró {operationCount} de unidades de {operationType} por un total de ${operationCost}
+            '''
+            alert("Información de compra", message)
+
+        #0
+        if operationBONOSCounter < operationCEDEARCounter and operationBONOSCounter < operationMEPCounter:
+            zeroDataRegisterType = "BONOS"
+        elif operationCEDEARCounter < operationMEPCounter:
+            zeroDataRegisterType = "CEDEAR"
+        else:
+            zeroDataRegisterType = "MEP"
+        
+        print(f"El instrumento menos operado es {zeroDataRegisterType}")
+
+        #1
+        if operationBONOSCounter > operationCEDEARCounter and operationBONOSCounter > operationMEPCounter:
+            firstDataRegisterType = "BONOS"
+        elif operationCEDEARCounter > operationMEPCounter:
+            firstDataRegisterType = "CEDEAR"
+        else:
+            firstDataRegisterType = "MEP"
+
+        print(f"El instrumento más operado es {firstDataRegisterType}")
+
+        #2
+        print(f"{secondDataRegisterAmount} usuarios compraron entre 50 y 200 unidades de MEP")
+
+        #3
+        print(f"{thirdDataRegisterAmount} usuarios no compraron unidades de CEDEAR")
+
+        #4
+        print(f"El primer usuario que compró BONOS o CEDEAR es {fourthDataRegisterName} con ${fourthDataRegisterCost} invertidos")
+
+        #5
+        print(f"El usuario que menos unidades de BONOS compró es {fifthDataRegisterName}, siendo el comprador N° {fifthDataRegisterIndex}")
+
+        #6
+        print(f"El usuario que menos invirtió es {sixthDataRegisterName}, siendo el comprador N°{sixthDataRegisterIndex}")
+
+        #7
+        print(f"El usuario que más cantidad de unidades compró es {seventhDataRegisterName}, siendo el comprador N°{seventhDataRegisterAmount}")
+
+        #8
+        if operationCEDEARCounter != 0:
+            eighthDataRegisterAverage = eighthDataRegisterSum / operationCEDEARCounter
+
+        print(f"El promedio invertido por operación en CEDEAR es de ${eighthDataRegisterAverage}")
+
+        #9
+        if operationMEPCounter != 0:
+            ninthDataRegisterAverage = ninthDataRegisterSum / operationMEPCounter
+
+        print(f"El promedio de unidades de MEP compradas es de {ninthDataRegisterAverage}")
 
     def btn_mostrar_informe_1(self):
         pass
@@ -116,6 +304,7 @@ class App(customtkinter.CTk):
         pass
 
         
+
 
 if __name__ == "__main__":
     app = App()

@@ -44,12 +44,12 @@ class App(customtkinter.CTk):
         price = self.txt_importe.get()
         price = int(price)
 
-        saleRaw = self.txt_descuento.get()
-        saleRaw = int(saleRaw)
+        discountRaw = self.txt_descuento.get()
+        discountRaw = int(discountRaw)
 
-        sale = 1 - saleRaw / 100
+        discount = 1 - discountRaw / 100
 
-        result = price * sale
+        result = price * discount
         result = round(result, 2)
 
         message = f"El importe actualizado es de ${result}"

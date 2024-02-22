@@ -53,7 +53,7 @@ class App(customtkinter.CTk):
         weight = float(weight)
 
         result = weight / truckCapacity
-        result = result + 0.5
+        result = result + 0.499
         result = round(result, 2)
 
         message = f"La cantidad de camiones necesaria para transportar la carga es de {result} camiones"

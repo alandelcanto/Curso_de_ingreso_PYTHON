@@ -8,7 +8,7 @@ import customtkinter
 nombre: Alan
 apellido: del Canto
 ---
-TP: Match con if adentro_Iluminacion
+TP: If con Match adentro_Iluminacion
 ---
 Enunciado:
 Todas las lámparas están  al mismo precio de $800 pesos final.
@@ -51,29 +51,30 @@ class App(customtkinter.CTk):
 
         brand = self.combobox_marca.get()
 
-        
-        match(quantity):
-            case 5:
-                if brand == "ArgentinaLuz":
-                    discount = 40
-                else:
-                    discount = 30
-            case 4:
-                if brand == "ArgentinaLuz" or brand == "FelipeLamparas":
-                    discount = 25
-                else:
-                    discount = 20
-            case 3:
-                if brand == "ArgentinaLuz":
-                    discount = 15
-                elif brand == "FelipeLamparas":
-                    discount = 10
-                else:
-                    discount = 5
-            case 2 | 1 :
-                pass
-            case _:
+        if quantity >= 6:
                 discount = 50
+        elif quantity == 5:
+                match(brand):
+                    case "ArgentinaLuz":
+                        discount = 40
+                    case _:
+                        discount = 30
+        elif quantity == 4:
+                match(brand):
+                    case "ArgentinaLuz" | "FelipeLamparas":
+                        discount = 25
+                    case _:
+                        discount = 20
+        elif quantity == 3:
+                match(brand):
+                    case "ArgentinaLuz":
+                        discount = 15
+                    case "FelipeLamparas":
+                        discount = 10
+                    case _:
+                        discount = 5
+
+            
 
         subTotal = quantity * unitPrice
         total = subTotal * (1 - discount / 100)

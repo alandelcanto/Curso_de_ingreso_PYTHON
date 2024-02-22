@@ -45,7 +45,7 @@ class App(customtkinter.CTk):
         incrementRaw = self.txt_incremento.get()
         incrementRaw = int(incrementRaw)
 
-        increment =  incrementRaw / 100 + 1
+        increment = incrementRaw / 100 + 1
 
         result = salary * increment
         result = round(result, 2)

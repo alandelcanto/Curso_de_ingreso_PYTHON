@@ -5,8 +5,8 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-nombre:
-apellido:
+nombre: Alan
+apellido: del Canto
 ---
 TP: While_elecciones_paso
 ---
@@ -35,7 +35,73 @@ class App(customtkinter.CTk):
         self.btn_validar.grid(row=4, pady=20, columnspan=2, sticky="nsew")
 
     def btn_validar_on_click(self):
-        pass
+        name = prompt("Nombre", "Ingrese el nombre del candidato")
+
+        age = prompt("Edad", "Ingrese la edad del ingresantes")
+        age = int(age)
+
+        voteCount = prompt("Votos", "Ingrese la cantidad de votos")
+        voteCount = int(voteCount)
+
+        maximumVoteCount = voteCount
+        minimumVoteCount = voteCount
+
+        voteTotalCount = 0
+
+        ageCounter = 0
+        ageSum = 0
+
+        minimumVoteAge = 0
+        minimumVoteName = 0
+
+        maximumVoteName = 0
+
+        while True:
+            name = prompt("Nombre", "Ingrese el nombre del candidato")
+            if name == None:
+                break
+
+            while age < 25:
+                age = prompt("Edad", "Ingrese la edad del candidato")
+                age = int(age)
+            if age == None:
+                break
+            
+
+            while voteCount < 0: 
+                voteCount = prompt("Votos", "Ingrese la cantidad de votos del candidato")
+                voteCount = int(voteCount)
+            if voteCount == None:
+                break
+            
+
+            if voteCount > maximumVoteCount:
+                maximumVoteCount = voteCount
+                maximumVoteName = name
+
+            elif voteCount < minimumVoteCount:
+                minimumVoteCount = voteCount
+                minimumVoteName = name
+                minimumVoteAge = age
+
+            ageCounter += 1
+            ageSum += age
+
+            voteTotalCount += voteCount
+
+        ageAverage = ageSum / ageCounter
+
+        message = f'''
+        El candidato con más votos es {maximumVoteName} con {maximumVoteCount} votos.
+        El candidato menos votado es {minimumVoteName}, y tiene {minimumVoteAge} años.
+        El promedio de edad de los candidatos es de {ageAverage} años.
+        La cantidad total de votos emitidos es de {voteTotalCount} votos.
+        '''
+
+        alert ("Información de elecciones", message)
+
+
+
 
 
 if __name__ == "__main__":

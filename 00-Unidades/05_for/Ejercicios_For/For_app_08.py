@@ -3,10 +3,10 @@ from tkinter.messagebox import showinfo as alert
 from tkinter.messagebox import askyesno as question
 from tkinter.simpledialog import askstring as prompt
 import customtkinter
-
+import time
 '''
-nombre:
-apellido:
+nombre: Alan
+apellido: del Canto
 ---
 Ejercicio: for_08
 ---
@@ -26,7 +26,37 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_on_click(self):
-        pass
+        start = time.time()
+        endValue = prompt("Número", "Ingrese un número")
+        endValue = int(endValue)
+
+        primeCounter = 0
+        primeNumberFlag = True
+
+
+        for i in range(2, endValue):
+            primeNumberFlag = True
+
+            for j in range(2, i):
+                if i % j == 0 :
+                    primeNumberFlag = False
+                    break
+                if (i / 2)  < j:
+                   break
+                
+                    
+            if primeNumberFlag == True:
+                primeCounter +=1
+                print(i)
+                
+        print(time.time() - start)
+        alert("Números primos", f"Se encontraron {primeCounter} números primos")
+
+
+
+
+
+
     
 if __name__ == "__main__":
     app = App()

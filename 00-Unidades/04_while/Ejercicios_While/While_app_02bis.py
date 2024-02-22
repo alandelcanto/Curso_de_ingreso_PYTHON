@@ -6,8 +6,8 @@ import customtkinter
 
 
 '''
-nombre:
-apellido:
+nombre: Alan
+apellido: del Canto
 ---
 Ejercicio: while_02bis
 ---
@@ -29,7 +29,16 @@ class App(customtkinter.CTk):
         
     
     def btn_mostrar_iteracion_on_click(self):
-        pass
+        iteration = 0 
+        numberSum = 0
+
+        while iteration < 11:
+            if iteration % 2 == 0:
+                numberSum += iteration
+                
+            iteration += 1
+
+        alert("Números pares", f"La suma de los números pares entre el 1 y el 10 es de {numberSum}")
     
     
 if __name__ == "__main__":
