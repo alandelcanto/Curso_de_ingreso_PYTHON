@@ -105,6 +105,16 @@ class App(customtkinter.CTk):
             match tipo:
                 case "Gato":
                     contadorGato += 1
+
+                    if edadMáximaBandera == False: #D
+                        edadMáxima = edad
+                        edadMáximaNombre = nombre
+                        edadMáximaSexo = sexo
+                        edadMáximaBandera = True
+                    elif edad > edadMáxima:
+                        edadMáxima = edad
+                        edadMáximaNombre = nombre
+                        edadMáximaSexo = sexo
                 case "Perro":
                     contadorPerro += 1
                 case "Exotico":
@@ -124,18 +134,6 @@ class App(customtkinter.CTk):
             
             ##
 
-            if edadMáximaBandera == False: #D
-                edadMáxima = edad
-                edadMáximaNombre = nombre
-                edadMáximaSexo = sexo
-                edadMáximaBandera = True
-            elif edad > edadMáxima:
-                edadMáxima = edad
-                edadMáximaNombre = nombre
-                edadMáximaSexo = sexo
-
-            ##
-            
         ##Proceso fuera del loop
         if contadorM > contadorF: #A
             sexoMayor = "M (Macho)"
@@ -158,7 +156,7 @@ class App(customtkinter.CTk):
         mensajeFinal += f"El sexo más ingresado fue {sexoMayor}, con {sexoMayorCantidad} mascotas\n" #A
         mensajeFinal += f"El porcentaje de gatos es de {porcentajeGato}, el de perros es de {porcentajePerro}, y el de exóticos es de {porcentajeExotico}\n" #B
         mensajeFinal += f"La mascota más pesada se llama {nombrePesoMáximo}, con {pesoMáximo} Kg\n" #C
-        mensajeFinal += f"La mascota más vieja es {edadMáximaNombre} de sexo {edadMáximaSexo}, con {edadMáxima} años\n" #D
+        mensajeFinal += f"El gato más viejo es {edadMáximaNombre} de sexo {edadMáximaSexo}, con {edadMáxima} años\n" #D
         mensajeFinal += f"El promedio de edad de las mascotas es de {promedioEdad}"
 
         print(mensajeFinal)
