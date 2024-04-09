@@ -13,8 +13,12 @@ Ejercicio: for_08
 Enunciado:
 Al presionar el botón 'Mostrar' pedir un número. Mostrar cada número primo entre 1 y el número ingresado, e informar la cantidad de números primos encontrados.
 '''
+cache = {}
+
 
 class App(customtkinter.CTk):
+
+  
     
     def __init__(self):
         super().__init__()
@@ -33,12 +37,16 @@ class App(customtkinter.CTk):
         primeCounter = 0
         primeNumberFlag = True
 
+        i = 0
+        j = 0
 
         for i in range(2, endValue):
             primeNumberFlag = True
 
             for j in range(2, i):
-                if i % j == 0 :
+                if cache.get(i) != None:
+                    break
+                elif i % j == 0 :
                     primeNumberFlag = False
                     break
                 if (i / 2)  < j:
@@ -47,7 +55,7 @@ class App(customtkinter.CTk):
                     
             if primeNumberFlag == True:
                 primeCounter +=1
-                print(i)
+                cache.update({i:j})
                 
         print(time.time() - start)
         alert("Números primos", f"Se encontraron {primeCounter} números primos")
